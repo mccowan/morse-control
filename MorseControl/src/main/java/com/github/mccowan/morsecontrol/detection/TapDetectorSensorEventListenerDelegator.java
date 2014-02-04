@@ -3,16 +3,16 @@ package com.github.mccowan.morsecontrol.detection;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import com.github.mccowan.morsecontrol.detection.tap.TapDetector;
+import com.github.mccowan.tap.StreamingTapDetector;
 
 import java.util.Date;
 
 /**
-* Delegates {@link android.hardware.SensorEventListener} events to a {@link com.github.mccowan.morsecontrol.detection.tap.TapDetector}.
+* Delegates {@link android.hardware.SensorEventListener} events to a {@link com.github.mccowan.tap.StreamingTapDetector}.
 */
 public class TapDetectorSensorEventListenerDelegator implements SensorEventListener {
-    private final TapDetector tapDetector;
-    public TapDetectorSensorEventListenerDelegator(final TapDetector tapDetector) {
+    private final StreamingTapDetector tapDetector;
+    public TapDetectorSensorEventListenerDelegator(final StreamingTapDetector tapDetector) {
         this.tapDetector = tapDetector;
     }
 

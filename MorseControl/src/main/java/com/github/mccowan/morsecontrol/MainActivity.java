@@ -7,20 +7,21 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import com.github.mccowan.morsecontrol.detection.tap.TapDetector;
 import com.github.mccowan.morsecontrol.detection.TapDetectorSensorEventListenerDelegator;
+import com.github.mccowan.tap.StreamingTapDetector;
+import com.github.mccowan.tap.TapHandler;
 
 import java.io.IOException;
 
 public class MainActivity extends Activity {
+    final private String LOG_SLUG = this.getClass().getCanonicalName();
     private SensorManager sensorManager;
     private Sensor accelerometerSensor;
 
-    // TODO
-    final TapDetector tapDetector = new TapDetector(new TapDetector.TapHandler() {
+    final StreamingTapDetector tapDetector = new StreamingTapDetector(new TapHandler() {
         @Override
-        public void onTap() {
-            Log.d("TAPPED!", ":)");
+        public void onTap(final long l) {
+            Log.d(LOG_SLUG, "Tap detected!  Time = " + l);
         }
     });
     final TapDetectorSensorEventListenerDelegator tapDetectorAdapter = new TapDetectorSensorEventListenerDelegator(tapDetector);
@@ -55,15 +56,6 @@ public class MainActivity extends Activity {
     }
 
     public void onSharePress(final View view) throws IOException {
-        //final String filename = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(new Date()) + ".log";
-        //final File destination = new File(new File(getFilesDir(), "data"), filename);
-        tapDetector.writeAndPurgeData();
-        //Toast.makeText(getApplicationContext(), "Wrote to " + destination.getAbsolutePath(), 5).show();
-        //FileProvider.getUriForFile(getApplicationContext(), "com.github.mccowan.morsecontrol.fileprovider", destination);
-        // todo: what the shebang do i do here
-        //final Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        //sharingIntent.setType("text/rf");
-        //sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(destination));
-        //startActivity(sharingIntent);
+        Log.d(LOG_SLUG, "Share pressed.");
     }
 }
